@@ -4,6 +4,7 @@ import dbConnection from "../../../../providers/db";
 import jwt from "jsonwebtoken";
 import { forgotPasswordEmailQueue } from "../../../../jobs/ForgotMailSend";
 import bcrypt from "bcryptjs";
+import { logger } from "../../../../providers/logger";
 
 export class ForgotPasswordController {
   public static async forgot(req: Request, res: Response) {
@@ -43,8 +44,11 @@ export class ForgotPasswordController {
       },
     });
 
-    const url = `${env.app.host}:${env.app.port}/reset-password?token=${token}`;
+    const url = `${env.app.host}/reset-password?token=${token}`;
+    logger.error(url,"0----0")
+    // const url = `${env.app.host}:${env.app.port}/reset-password?token=${token}`;
     const subject = "Reset your password";
+
     const data = {
       email,
       url,
@@ -62,6 +66,8 @@ export class ForgotPasswordController {
   public static async checkResetToken(req: Request, res: Response) {
     return res.send({
       status: true,
+      message: req.t("user.password_reset_success"),
+
     });
   }
 

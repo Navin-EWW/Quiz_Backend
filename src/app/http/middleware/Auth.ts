@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { env } from "../../../env";
 import dbConnection from "../../providers/db";
+import { logger } from "../../providers/logger";
 
 export const verifyToken = async (
   req: Request,
@@ -60,8 +61,10 @@ export const verifyResetToken = async (
 ) => {
   try {
     const token = req.query.token;
+logger.info("reset token",token)
 
     if (!token || typeof token !== "string") {
+
       return res.status(401).send({
         status: false,
         message: req.t("user.token_not_found"),
@@ -94,8 +97,8 @@ export const verifyResetToken = async (
       token: token,
       user: user,
     };
-
     next();
+    
   } catch (err) {
     return res.send({
       status: false,

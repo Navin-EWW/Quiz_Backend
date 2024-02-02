@@ -2,6 +2,7 @@ import { AppleDetail, SocialTypes, User } from "@prisma/client";
 import dbConnection from "../providers/db";
 
 export class SocialService {
+  
   public static async getAppleDetails(
     socialId: string
   ): Promise<AppleDetail | null> {
@@ -27,6 +28,7 @@ export class SocialService {
       },
     });
   }
+
   public static async socialLogin(
     socialId: string,
     socialType: SocialTypes,

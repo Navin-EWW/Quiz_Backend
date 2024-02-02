@@ -34,7 +34,6 @@ export class AuthController {
       message: req.t("user.user_created"),
     });
   }
-
   public static async login(req: Request, res: Response) {
     const { email, password, deviceType, fcmToken, metaData } =
       req.body.validatedData;
@@ -61,7 +60,6 @@ export class AuthController {
       message: req.t("user.logged_in"),
     });
   }
-
   public static async profile(req: Request, res: Response) {
     const { user } = req.body.auth;
     if (user === null) {
@@ -76,7 +74,6 @@ export class AuthController {
       data: UserResponse(user),
     });
   }
-
   public static async logOut(req: Request, res: Response) {
     const { device, user } = req.body.auth;
     DeviceService.delete(device.id, user.id);

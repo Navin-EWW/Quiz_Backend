@@ -10,23 +10,82 @@ datasource db {
 }
 
 model User {
-  id                  Int          @id @default(autoincrement())
+  id                  Int            @id @default(autoincrement())
   firstName           String
   lastName            String
-  email               String       @unique
+  email               String         @unique
   password            String?
   forgotPasswordToken String?
-  socialId            String?      @unique
+  socialId            String?        @unique
   socialType          SocialTypes?
-  status              Status       @default(ACTIVE)
-  createdAt           DateTime     @default(now())
-  updatedAt           DateTime     @updatedAt
+  status              Status         @default(ACTIVE)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
   deletedAt           DateTime?
-
-  devices       Device[]
-  notifications Notification[]
+  devices             Device[]
+  notifications       Notification[]
+  Question            Question[]
+  Test                Test[]
 
   @@map("users")
+}
+
+model Subject {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  deletedAt DateTime?
+  Question  Question[]
+  Test      Test[]
+
+  @@map("subject")
+}
+
+model Question {
+  id           Int       @id @default(autoincrement())
+  userId       Int
+  subjectId    Int
+  questionName String    @unique
+  option       String
+  type         String
+  answer       String?
+  imageUrl     String?
+  author       User      @relation(fields: [userId], references: [id])
+  subject      Subject   @relation(fields: [subjectId], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+
+  @@map("question")
+}
+
+model TestToSubject {
+  testId    Int
+  subjectId Int
+  test      Test    @relation(fields: [testId], references: [id])
+  subject   Subject @relation(fields: [subjectId], references: [id])
+
+  @@id([testId, subjectId])
+}
+
+model Test {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  subjectId   Int[]
+  name        String    @unique
+  discription String
+  type        String
+  keyWord     String
+  imageUrl    String?
+  testTime    String?
+  author      User      @relation(fields: [userId], references: [id])
+  subject     Subject[]   @relation(fields: [TestToSubject], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@map("test")
 }
 
 model Device {

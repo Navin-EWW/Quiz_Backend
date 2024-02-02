@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import hbs from "nodemailer-express-handlebars";
 import { env } from "../../env";
+
 const options = {
   host: env.mail.host,
   port: env.mail.port,
