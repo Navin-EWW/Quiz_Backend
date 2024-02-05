@@ -5,8 +5,10 @@ import { SignUpService } from "../../../../services/SignUpService";
 import { UserResponse } from "../../../responses/UserResponse";
 
 export class AuthController {
+  
   public static async signUp(req: Request, res: Response) {
     const validatedData = req.body;
+
     const userExists = await SignUpService.checkIfUserExists(
       validatedData.email
     );
@@ -19,7 +21,9 @@ export class AuthController {
     }
 
     const user = await SignUpService.signUp(validatedData);
+
     const { deviceType, fcmToken, metaData } = validatedData;
+
     const device = await DeviceService.create(
       user.id,
       deviceType,

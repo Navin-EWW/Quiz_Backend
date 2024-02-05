@@ -5,6 +5,7 @@ import { SocialService } from "../../../../services/SocialService";
 import { UserResponse } from "../../../responses/UserResponse";
 
 export class SocialLoginController {
+  
   public static async socialLogin(req: Request, res: Response) {
     const { auth } = req.body;
     const { socialType, deviceType, fcmToken, firstName, lastName, metaData } =

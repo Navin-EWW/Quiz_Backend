@@ -11,7 +11,7 @@ const { middleware, i18next } = locale.initializeLocales();
 
 Promise.all([
   express.initializeApp(),
-  // express.configureRateLimiter(),
+  express.configureRateLimiter(),
   express.configureLocale(middleware, i18next),
   express.configureViews(serverAdapter),
   express.configureExceptionHandler(),

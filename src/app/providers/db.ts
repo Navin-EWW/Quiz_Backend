@@ -24,10 +24,9 @@ dbConnection.$use(async (params, next) => {
 });
 
 dbConnection.$use(async (params, next) => {
+
   const before = Date.now();
-
   const result = await next(params);
-
   const after = Date.now();
 
   logger.info(

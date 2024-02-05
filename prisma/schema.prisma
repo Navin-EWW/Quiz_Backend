@@ -26,18 +26,22 @@ model User {
   notifications       Notification[]
   Question            Question[]
   Test                Test[]
+  Subject             Subject[]
 
   @@map("users")
 }
 
 model Subject {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  deletedAt DateTime?
-  Question  Question[]
-  Test      Test[]
+  id          Int        @id @default(autoincrement())
+  userId      Int
+  name        String     @unique
+  discription String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  deletedAt   DateTime?
+  author      User       @relation(fields: [userId], references: [id])
+  Question    Question[]
+  Test        Test[]
 
   @@map("subject")
 }
@@ -60,19 +64,19 @@ model Question {
   @@map("question")
 }
 
-model TestToSubject {
-  testId    Int
-  subjectId Int
-  test      Test    @relation(fields: [testId], references: [id])
-  subject   Subject @relation(fields: [subjectId], references: [id])
+// model TestToSubject {
+//   testId    Int
+//   subjectId Int
+//   test      Test    @relation(fields: [testId], references: [id])
+//   subject   Subject @relation(fields: [subjectId], references: [id])
 
-  @@id([testId, subjectId])
-}
+//   @@id([testId, subjectId])
+// }
 
 model Test {
   id          Int       @id @default(autoincrement())
   userId      Int
-  subjectId   Int[]
+  subjectId   Int
   name        String    @unique
   discription String
   type        String
@@ -80,7 +84,7 @@ model Test {
   imageUrl    String?
   testTime    String?
   author      User      @relation(fields: [userId], references: [id])
-  subject     Subject[]   @relation(fields: [TestToSubject], references: [id])
+  subject     Subject   @relation(fields: [subjectId], references: [id])
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?

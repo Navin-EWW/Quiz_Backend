@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import { User } from "@prisma/client";
 
 export class SignUpService {
+  
   public static async signUp(validatedData: any): Promise<User> {
     const { firstName, lastName, email, password } = validatedData;
     const user = await dbConnection.user.create({
