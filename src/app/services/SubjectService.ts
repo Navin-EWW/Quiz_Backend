@@ -9,9 +9,10 @@ export class SubjectService {
     discription: string;
   }): Promise<Subject> {
 
-    console.log("-----createSubject")
+    console.log("-----createSubject",validatedData)
 
     const { name, discription, userId } = validatedData;
+    // try {
       const subjectData = await dbConnection.subject.create({
         data: {
           userId,
@@ -19,7 +20,13 @@ export class SubjectService {
           discription,
         },
       });
+      console.log("subjectData",subjectData)
+
       return subjectData;
+    // } catch (error) {
+    //   console.log(error)
+    // }
+     
    
   }
   public static async findSubjectById(id: number): Promise<Subject | null> {
@@ -51,7 +58,7 @@ export class SubjectService {
           id: findsubjectData?.id,
         },
         data:{
-
+          ...data
         }
       });
     }

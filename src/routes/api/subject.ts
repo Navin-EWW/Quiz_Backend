@@ -14,6 +14,10 @@ router.get(
   "/",
   SubjectController.allSubject
 );
+router.patch(
+  "/subjectId",
+  SubjectController.SubjectUpdate
+);
 router.get(
   "/:subjectId",
   SubjectController.SubjectById

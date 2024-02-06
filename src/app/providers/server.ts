@@ -6,7 +6,7 @@ import { logger } from "./logger";
 
 export class Server {
   server: http.Server;
-  logger: Logger;
+  logger: Logger | any
 
   constructor(app: Application) {
     this.server = http.createServer(app);

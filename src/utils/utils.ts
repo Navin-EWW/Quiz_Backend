@@ -9,7 +9,7 @@ import {
 export const queueConnection = {
   connection: {
     host: env.redis.host,
-    port: env.redis.port,
+    port:Number( env.redis.port),
   },
 };
 
