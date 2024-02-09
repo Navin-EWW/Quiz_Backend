@@ -10,14 +10,17 @@ router.post(
   RequestValidator(createSubjectRequest),
   SubjectController.createSubject
 );
+
 router.get(
   "/",
   SubjectController.allSubject
 );
-router.patch(
-  "/subjectId",
+
+router.put(
+  "/:subjectId",
   SubjectController.SubjectUpdate
 );
+
 router.get(
   "/:subjectId",
   SubjectController.SubjectById

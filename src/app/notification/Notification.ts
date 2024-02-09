@@ -2,8 +2,8 @@ import { NotificationTypes } from "@prisma/client";
 import { MessagingPayload } from "firebase-admin/lib/messaging/messaging-api";
 import { PushNotificationChannels } from "../../utils/types";
 import dbConnection from "../providers/db";
-import { defaultMailSendQueue } from "../jobs/DefaultMailSend";
-import { sendPushNotificationQueue } from "../jobs/PushNotificationSend";
+// import { defaultMailSendQueue } from "../jobs/DefaultMailSend";
+// import { sendPushNotificationQueue } from "../jobs/PushNotificationSend";
 import { sendPushNotificationType } from "../../utils/types";
 
 export class Notification {
@@ -59,7 +59,7 @@ export class Notification {
         fcmTokens: this.fcmTokens,
         messagePayload: this.messagePayload,
       };
-      sendPushNotificationQueue.add("sendPushNotification", data);
+      // sendPushNotificationQueue.add("sendPushNotification", data);
     }
   }
 
@@ -70,6 +70,6 @@ export class Notification {
       body: this.messagePayload.data?.body,
     };
 
-    defaultMailSendQueue.add("defaultMailSend", data);
+    // defaultMailSendQueue.add("defaultMailSend", data);
   }
 }

@@ -46,7 +46,10 @@ export class SubjectService {
         },
       });
     }
-  public static async updateSubjectById(id: number ,data:any): Promise<Subject | null> {
+  public static async updateSubjectById(id: number ,data:{
+    name:string,
+    discription:string
+  }): Promise<Subject | null> {
 
     const findsubjectData=await dbConnection.subject.findFirst({
       where: {
@@ -58,7 +61,8 @@ export class SubjectService {
           id: findsubjectData?.id,
         },
         data:{
-          ...data
+        name:data.name??findsubjectData?.name,
+        discription:data.discription??findsubjectData?.discription
         }
       });
     }

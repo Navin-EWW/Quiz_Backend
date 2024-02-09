@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { env } from "../../../../../env";
 import dbConnection from "../../../../providers/db";
 import jwt from "jsonwebtoken";
-import { forgotPasswordEmailQueue } from "../../../../jobs/ForgotMailSend";
+// import { forgotPasswordEmailQueue } from "../../../../jobs/ForgotMailSend";
 import bcrypt from "bcryptjs";
 import { logger } from "../../../../providers/logger";
 
@@ -54,8 +54,8 @@ export class ForgotPasswordController {
       url,
       subject,
     };
-
-    forgotPasswordEmailQueue.add("sendForgotPasswordEmail", data);
+logger.info(data)
+    // forgotPasswordEmailQueue.add("sendForgotPasswordEmail", data);
 
     return res.json({
       status: true,

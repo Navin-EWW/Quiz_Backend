@@ -98,10 +98,12 @@ export class SubjectController {
     const { user } = req.body.auth;
     const { subjectId } = req.params;
     const validatedData = req.body;
+    const {name,discription}=validatedData
 
-    console.log("-SubjectUpdate", subjectId);
+    console.log("-SubjectUpdate", subjectId,validatedData.name,validatedData.discription);
     try {
-      const updateSubject = await SubjectService.updateSubjectById(Number(subjectId),{...validatedData});
+     
+      const updateSubject = await SubjectService.updateSubjectById(Number(subjectId),{name,discription});
 
       if (!updateSubject) {
         return res.status(500).send({

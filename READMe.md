@@ -59,7 +59,7 @@ Install on production
 
 ## Authors
 
-- [@rajanmodi30](https://github.com/rajanmodi30)
+Navin kumar
 
 
 ## License

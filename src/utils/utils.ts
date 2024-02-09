@@ -6,12 +6,14 @@ import {
   UPLOAD_TYPES,
 } from "./types";
 
-export const queueConnection = {
-  connection: {
-    host: env.redis.host,
-    port:Number( env.redis.port),
-  },
-};
+// export const queueConnection = {
+//   connection: {
+//     host: env.redis.host,
+//     port:Number(env.redis.port),
+//   },
+// };
+
+
 
 export const pagination = (
   totalCount: number,

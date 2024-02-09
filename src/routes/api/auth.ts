@@ -45,6 +45,13 @@ router.post(
   ForgotPasswordController.resetPassword
 );
 
+router.put(
+  "/change-password",
+  RequestValidator(ResetPasswordRequest),
+  verifyToken,
+  ForgotPasswordController.resetPassword
+);
+
 router.get("/logout", verifyToken, AuthController.logOut);
 
 export default router;

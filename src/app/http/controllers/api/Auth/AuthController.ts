@@ -81,7 +81,7 @@ export class AuthController {
   public static async logOut(req: Request, res: Response) {
     const { device, user } = req.body.auth;
     DeviceService.delete(device.id, user.id);
-
+    
     return res.json({
       status: true,
       message: req.t("user.logged_out"),
